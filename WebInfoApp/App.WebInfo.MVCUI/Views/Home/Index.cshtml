@@ -5,7 +5,7 @@
 <ul class="list-group">
     @foreach (var menu in Model.list)
     {
-        <li class="list-group-item">@menu.MenuId-@menu.MenuName</li>
+        <li class="list-group-item"><a href="@menu.MenuUrl">@menu.MenuName</a></li>
     }
 
 </ul>
