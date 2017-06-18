@@ -73,8 +73,6 @@
                         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                         <!--Ahmet Kapattı-->
                         <!--await Component.InvokeAsync("UserLoginViewComponet")-->
-
-
                         <!-- END USER LOGIN DROPDOWN -->
                     </ul>
                 </div>
@@ -223,5 +221,10 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+      
+            @Html.Raw(TempData["alertUi"])
+      
+    </script>
 </body>
 </html>

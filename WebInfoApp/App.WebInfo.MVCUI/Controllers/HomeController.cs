@@ -1,4 +1,5 @@
-﻿using App.WebInfo.Business.Abstract;
+﻿using App.Core.Utilities;
+using App.WebInfo.Business.Abstract;
 using App.WebInfo.MVCUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ namespace App.WebInfo.MVCUI.Controllers
             {
                 list = await _menuService.GetList()
             };
-
+            alertUi.AlertUiType = AlertUiType.success;
+            AlertUiMessage();
            return View(item);
         }
 

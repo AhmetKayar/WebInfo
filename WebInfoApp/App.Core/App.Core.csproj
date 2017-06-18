@@ -6,10 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Utilities\" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
 </Project>
