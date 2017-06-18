@@ -20,6 +20,9 @@
       "wwwroot/assets/apps/css/todo.min.css",
       "wwwroot/assets/global/plugins/sweetalert/sweetalert.css",
       "wwwroot/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css",
+      "wwwroot/assets/layouts/layout4/css/layout.min.css",
+      "wwwroot/assets/layouts/layout4/css/themes/default.min.css",
+      "wwwroot/assets/layouts/layout4/css/custom.min.css",
       "wwwroot/assets/css/style.css"
     ]
   },
