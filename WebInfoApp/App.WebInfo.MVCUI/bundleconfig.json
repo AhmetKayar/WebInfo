@@ -5,13 +5,51 @@
     "outputFileName": "wwwroot/css/site.min.css",
     // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
-      "wwwroot/css/site.css"
+      "wwwroot/assets/global/plugins/font-awesome/css/font-awesome.css",
+      "wwwroot/assets/global/plugins/simple-line-icons/simple-line-icons.css",
+      "wwwroot/assets/global/plugins/bootstrap/css/bootstrap.css",
+      "wwwroot/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.css",
+      "wwwroot/assets/global/css/components-md.css",
+      "wwwroot/assets/global/css/plugins-md.css",
+      "wwwroot/assets/global/plugins/datatables/datatables.min.css",
+      "wwwroot/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css",
+      "wwwroot/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css",
+      "wwwroot/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css",
+      "wwwroot/assets/global/plugins/select2/css/select2.min.css",
+      "wwwroot/assets/global/plugins/select2/css/select2-bootstrap.min.css",
+      "wwwroot/assets/apps/css/todo.min.css",
+      "wwwroot/assets/global/plugins/sweetalert/sweetalert.css",
+      "wwwroot/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css",
+      "wwwroot/assets/css/style.css"
     ]
   },
   {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
-      "wwwroot/js/site.js"
+      "wwwroot/assets/global/plugins/bootstrap/js/bootstrap.js",
+      "wwwroot/assets/global/plugins/js.cookie.js",
+      "wwwroot/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js",
+      "wwwroot/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.js",
+      "wwwroot/assets/global/plugins/jquery.blockui.js",
+      "wwwroot/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.js",
+      "wwwroot/assets/global/scripts/app.js",
+      "wwwroot/assets/layouts/layout4/scripts/layout.js",
+      "wwwroot/assets/layouts/layout4/scripts/demo.js",
+      "wwwroot/assets/layouts/global/scripts/quick-sidebar.js",
+      "wwwroot/assets/global/scripts/datatable.js",
+      "wwwroot/assets/global/plugins/datatables/datatables.min.js",
+      "wwwroot/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js",
+      "wwwroot/assets/pages/scripts/table-datatables-managed.js",
+      "wwwroot/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js",
+      "wwwroot/assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js",
+      "wwwroot/assets/global/plugins/select2/js/select2.full.min.js",
+      "wwwroot/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js",
+      "wwwroot/assets/pages/scripts/components-bootstrap-select.min.js",
+      "wwwroot/assets/apps/scripts/todo.min.js",
+      "wwwroot/assets/pages/scripts/components-date-time-pickers.min.js",
+      "wwwroot/assets/global/plugins/sweetalert/sweetalert.min.js",
+      "wwwroot/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js",
+      "wwwroot/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
     ],
     // Optionally specify minification options
     "minify": {

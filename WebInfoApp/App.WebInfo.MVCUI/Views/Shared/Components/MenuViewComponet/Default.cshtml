@@ -1,0 +1,32 @@
+﻿@model App.WebInfo.MVCUI.Models.MenuViewModel
+
+@foreach (var menu in Model.list)
+{
+
+    <li class="nav-item start @(menu.MenuUrl == ViewBag.isMenuLink ? "active":"")">
+        <a href="@menu.MenuUrl" class="nav-link nav-toggle">
+            <i class="icon-@menu.MenuIcon.ToString().ToLower().Replace('_','-')"></i>
+            <span class="title">@menu.MenuName</span>
+            @if (menu.SubMenu.Count > 0)
+            {
+                <span class="arrow "></span>
+            }
+        </a>
+        @if (menu.SubMenu.Count > 0)
+        {
+            <ul class="sub-menu">
+                @foreach (var submenu in menu.SubMenu)
+                {
+                    <li class="nav-item  @(submenu.MenuUrl == ViewBag.isMenuLink ? "active" : "")">
+
+                        <a href="@submenu.MenuUrl" class="nav-link nav-toggle">
+                            <i class="icon-@submenu.MenuIcon.ToString().ToLower().Replace('_', '-')"></i>
+                            <span class="title">@submenu.MenuName</span>
+                        </a>
+                    </li>
+
+                }
+            </ul>
+        }
+    </li>
+}
