@@ -1,10 +1,10 @@
 ﻿using App.Core.Dal;
 using App.Core.Entites;
-using App.WebInfo.Busipubness.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using App.WebInfo.Business.Abstract;
 
 namespace App.WebInfo.Business.Concrete
 {
@@ -12,7 +12,7 @@ namespace App.WebInfo.Business.Concrete
         where TManger : class, IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
     {
-        private TManger _manager;
+        private readonly TManger _manager;
         public ManagerBase(TManger manager)
         {
             _manager = manager;
@@ -35,7 +35,7 @@ namespace App.WebInfo.Business.Concrete
         {
             return await _manager.GetList(null, null);
         }
-        public async Task<List<TEntity>> GetList(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, bool>>[] include)
+        public async Task<List<TEntity>> GetList(Expression<Func<TEntity, bool>> filter = null,string include=null)
         {
             return await _manager.GetList(filter, include);
         }

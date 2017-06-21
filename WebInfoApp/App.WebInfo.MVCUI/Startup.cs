@@ -39,6 +39,12 @@ namespace App.WebInfo.MVCUI
             services.AddScoped<IMenuService, MenuManager>();
             services.AddScoped<IMenuDal, EfMenuDal>();
 
+            services.AddScoped<IPersonalService, PersonalManager>();
+            services.AddScoped<IPersonalDal, EfPersonalDal>();
+
+            services.AddScoped<IUtileService, UtileManager>();
+            services.AddScoped<IUtileDal, EfUtileDal>();
+
             services.AddMvc();
             services.AddDbContext<WebInfoContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("WebInfoContext")));

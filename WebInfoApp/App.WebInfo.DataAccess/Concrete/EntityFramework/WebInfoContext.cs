@@ -5,7 +5,10 @@ namespace App.WebInfo.DataAccess.Concrete.EntityFramework
 {
     public class WebInfoContext: DbContext
     {
-        public WebInfoContext(DbContextOptions<WebInfoContext> options) : base(options) { }
+        public WebInfoContext(DbContextOptions<WebInfoContext> options) : base(options)
+        {
+            
+        }
         public WebInfoContext()
         {
 

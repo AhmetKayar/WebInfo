@@ -1,9 +1,6 @@
 ﻿using App.WebInfo.Business.Abstract;
 using App.WebInfo.MVCUI.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace App.WebInfo.MVCUI.ViewComponents

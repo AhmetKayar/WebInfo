@@ -16,7 +16,8 @@ namespace App.Core.Dal.EntityFramework
         {
             using (var context = new TContext())
             {
-                context.Entry(entity);
+                var addedEntity=context.Entry(entity);
+                addedEntity.State = EntityState.Added;
                 await context.SaveChangesAsync();
             }
         }
@@ -38,17 +39,19 @@ namespace App.Core.Dal.EntityFramework
             }
         }
 
-        public async Task<List<TEntity>> GetList(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, bool>>[] include)
+        public async Task<List<TEntity>> GetList(Expression<Func<TEntity, bool>> filter = null, string includes=null)
         {
             using (var context = new TContext())
             {
-                var query = context.Set<TEntity>();
-                if (include != null)
+                IQueryable<TEntity> query = context.Set<TEntity>();
+                if (includes != null)
                 {
-                    foreach (var item in include)
+                    foreach (var includeProperty in includes.Split
+                        (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                     {
-                        query.Include(item);
+                        query=query.Include(includeProperty);
                     }
+
                 }
                 return filter == null ? await query.ToListAsync() : await query.Where(filter).ToListAsync();
             }
