@@ -45,6 +45,7 @@ namespace App.WebInfo.MVCUI
             services.AddScoped<IUtileService, UtileManager>();
             services.AddScoped<IUtileDal, EfUtileDal>();
 
+            services.AddMemoryCache();
             services.AddMvc();
             services.AddDbContext<WebInfoContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("WebInfoContext")));

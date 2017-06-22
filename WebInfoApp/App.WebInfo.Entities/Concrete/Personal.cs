@@ -1,12 +1,9 @@
-﻿using App.Core.Entites;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace App.WebInfo.Entities.Concrete
 {
-    public class Personal : IEntity
+    public class Personal : EntitiyBase
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

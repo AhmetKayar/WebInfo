@@ -536,6 +536,7 @@ var App = function() {
         $("body").on("click", ".btn-delete", function (e) {
             var $this = $(this);
             var url = $this[0].href;
+            var callback = $this.attr("data-callback") || "";
             swal({
                 title: "Emin misin?",
                 text: "Bu içeriği silmek istediğinizden emin misiniz?",
@@ -561,7 +562,7 @@ var App = function() {
                                     showCancelButton: false,
                                     confirmButtonText: "Ok",
                                 }, function () {
-                                    location.reload();
+                                    eval(callback);
                                 });
                             } else {
                                 swal({
@@ -571,7 +572,7 @@ var App = function() {
                                     showCancelButton: false,
                                     confirmButtonText: "Ok",
                                 }, function () {
-                                    location.reload();
+                                    eval(callback);
                                 });
                             }
 

@@ -1,4 +1,4 @@
-var TableDatatablesManaged = function () {
+ï»¿var TableDatatablesManaged = function () {
 
     var initTable1 = function () {
 
@@ -198,7 +198,7 @@ var TableDatatablesManaged = function () {
             $(this).parents('tr').toggleClass("active");
         });
     }
-
+    var initTable2_table={};
     var initTable2 = function () {
 
         var table = $('#sample_2');
@@ -212,18 +212,18 @@ var TableDatatablesManaged = function () {
                     "sortAscending": ": activate to sort column ascending",
                     "sortDescending": ": activate to sort column descending"
                 },
-                "emptyTable": "Kayýt Bulunamadý.",
-                "info": "_START_ ile _END_ arasý toplam _TOTAL_ kayýt",
-                "infoEmpty": "Kayýt yok",
-                "infoFiltered": "(Arama sonucu toplam _MAX_ kayýt arasýndan yapýldý.)",
-                "lengthMenu": "Göster _MENU_",
+                "emptyTable": "KayÄ±t BulunamadÄ±.",
+                "info": "_START_ ile _END_ arasÄ± toplam _TOTAL_ kayÄ±t",
+                "infoEmpty": "KayÄ±t yok",
+                "infoFiltered": "(Arama sonucu toplam _MAX_ kayÄ±t arasÄ±ndan yapÄ±ldÄ±.)",
+                "lengthMenu": "GÃ¶ster _MENU_",
                 "search": "Ara:",
-                "zeroRecords": "Arama kaydý bulunamadý",
+                "zeroRecords": "Arama kaydÄ± bulunamadÄ±",
                 "paginate": {
                     "previous": "Geri",
-                    "next": "Ýleri",
+                    "next": "Ä°leri",
                     "last": "Son",
-                    "first": "Ýlk"
+                    "first": "Ä°lk"
                 }
             },
             "bProcessing": false,
@@ -274,6 +274,10 @@ var TableDatatablesManaged = function () {
                 }
             });
         });
+
+        initTable2_table.reload = function() {
+            table.fnUpdate();
+        };
     }
 
     var initTable3 = function () {
@@ -529,6 +533,9 @@ var TableDatatablesManaged = function () {
             initTable3();
             initTable4();
             initTable5();
+        },
+        reflesh: function () {
+            initTable2_table.reload();
         }
 
     };
