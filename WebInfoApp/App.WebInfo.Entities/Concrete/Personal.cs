@@ -13,10 +13,10 @@ namespace App.WebInfo.Entities.Concrete
         public virtual IkametDurumu IkametDurumu { get; set; }
 
         [Required]
-        [MaxLength(6)]
+        [MaxLength(15)]
         public string AileNo { get; set; }
         [Required]
-        [MaxLength(6)]
+        [MaxLength(11)]
         public string SahisNo { get; set; }
 
         [Required]

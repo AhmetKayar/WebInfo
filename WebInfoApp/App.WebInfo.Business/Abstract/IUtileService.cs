@@ -1,8 +1,6 @@
-﻿using System;
+﻿using App.WebInfo.Entities.Concrete;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using App.WebInfo.Entities.Concrete;
 
 namespace App.WebInfo.Business.Abstract
 {
@@ -18,5 +16,6 @@ namespace App.WebInfo.Business.Abstract
         Task<List<IslemYapan>> GetIslemYapans();
         Task<List<KanGrubu>> GetKanGrubus();
         Task<List<Uyruk>> GetUyruks();
+        Task<List<SaglikDurumu>> GetSaglikDurumus();
     }
 }

@@ -21,17 +21,27 @@ namespace App.Core.Dal.EntityFramework
                 await context.SaveChangesAsync();
             }
         }
-
-        public async Task<long> Count()
+        public async Task Add(List<TEntity> entity)
         {
             using (var context = new TContext())
             {
-                return await context.Set<TEntity>().LongCountAsync();
+                var addedEntity = context.Entry(entity);
+                addedEntity.State = EntityState.Added;
+                await context.SaveChangesAsync();
+            }
+        }
+        public async Task<long> Count(Expression<Func<TEntity, bool>> filter = null)
+        {
+            using (var context = new TContext())
+            {
+                return filter != null
+                    ? await context.Set<TEntity>().Where(filter).LongCountAsync()
+                    : await context.Set<TEntity>().LongCountAsync();
             }
 
         }
 
-        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter = null)
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter)
         {
             using (var context = new TContext())
             {

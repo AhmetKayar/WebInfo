@@ -62,6 +62,37 @@
             <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
             <!-- END RESPONSIVE MENU TOGGLER -->
             <!-- BEGIN PAGE TOP -->
+            <div class="page-actions">
+                <div class="btn-group">
+                    <button type="button" class="btn red-haze btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="true">
+                        <span class="hidden-sm hidden-xs">İşlemler&nbsp;</span>
+                        <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a asp-controller="Home" asp-action="ImportFile">
+                                <i class="icon-docs"></i> Toplu Yükleme </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="icon-user"></i> Kullancılar </a>
+                        </li>
+                        <li class="divider"> </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="icon-settings"></i> Ayarlar
+                                <span class="badge badge-success">4</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="icon-users"></i> Feedbacks
+                                <span class="badge badge-danger">2</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="page-top">
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <div class="top-menu">

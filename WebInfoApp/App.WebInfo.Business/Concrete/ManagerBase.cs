@@ -21,10 +21,13 @@ namespace App.WebInfo.Business.Concrete
         {
             await _manager.Add(entity);
         }
-
-        public async Task<long> Count()
+        public async Task Add(List<TEntity> entity)
         {
-            return await _manager.Count();
+            await _manager.Add(entity);
+        }
+        public async Task<long> Count(Expression<Func<TEntity, bool>> filter = null)
+        {
+            return await _manager.Count(filter);
         }
 
         public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter = null)

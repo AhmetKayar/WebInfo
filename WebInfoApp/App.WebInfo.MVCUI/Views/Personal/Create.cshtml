@@ -1,4 +1,5 @@
-﻿@model App.WebInfo.MVCUI.Models.PersonalViewModel
+﻿@using App.WebInfo.Entities.Concrete
+@model App.WebInfo.MVCUI.Models.PersonalViewModel
 
 @{
     ViewBag.Title = "Personel Ekleme";
@@ -25,10 +26,11 @@
         </div>
     </div>
     <div class="portlet-body">
-        <input type="hidden" asp-for="Personal.PersonalId" />
-        @Html.AntiForgeryToken()
+        <form asp-controller="Personal" asp-action="Create" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Personal.PersonalId" />
+            @Html.AntiForgeryToken()
 
-        <form asp-controller="Personal" asp-action="Create" method="post">
+
             <div class="tabbable tabbable-tabdrop">
                 <ul class="nav nav-tabs">
                     <li class="active">
@@ -105,20 +107,25 @@
                             <label asp-for="Personal.DogumYeri"></label>
                             <span asp-validation-for="Personal.DogumYeri" class="help-block"></span>
                         </div>
-                        
-                        <div class="form-group form-md-line-input form-md-floating-label">
-                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                <div class="input-group input-large">
-                                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
-                                        <i class="fa fa-file-o fileinput-exists"></i>
-                                        <span class="fileinput-filename"> </span>
+
+                        <div class="form-group form-md-line-input form-md-floating-label clearfix">
+                            <div class="col-xs-12 col-sm-2 col-md-2 text-center">
+                                <img src="@Model.Personal.PersonalImage" style="max-width: 150px; border-radius:50%" />
+                            </div>
+                            <div class="col-xs-12 col-sm-10 col-md-10">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="input-group input-large">
+                                        <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                            <i class="fa fa-file-o fileinput-exists"></i>
+                                            <span class="fileinput-filename"> </span>
+                                        </div>
+                                        <span class="input-group-addon btn default btn-file">
+                                            <span class="fileinput-new"> Resim Seç </span>
+                                            <span class="fileinput-exists"> Değiştir </span>
+                                            <input type="file" accept="*/.jpg" name="personalImage" asp-for="Personal.PersonalImage" />
+                                        </span>
+                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Kaldır </a>
                                     </div>
-                                    <span class="input-group-addon btn default btn-file">
-                                        <span class="fileinput-new"> Resim Seç </span>
-                                        <span class="fileinput-exists"> Değiştir </span>
-                                        <input type="file" accept="*/.jpg" name="personalImage" asp-for="Personal.PersonalImage"/>
-                                    </span>
-                                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Kaldır </a>
                                 </div>
                             </div>
                         </div>

@@ -96,9 +96,9 @@ namespace App.WebInfo.MVCUI.Controllers
             var islemYapanTask = _utileService.GetIslemYapans();
             var kanGrubuTask = _utileService.GetKanGrubus();
             var uyrukTask = _utileService.GetUyruks();
+            var saglikDurumuTask = _utileService.GetSaglikDurumus();
 
-
-            await Task.WhenAll(cinsiyetTask, dinTask, dogumYeriTask, egitimDurumuTask, ikametDurumuTask, ilTask, ilceTask, islemYapanTask, kanGrubuTask, uyrukTask);
+            await Task.WhenAll(cinsiyetTask, dinTask, dogumYeriTask, egitimDurumuTask, ikametDurumuTask, ilTask, ilceTask, islemYapanTask, kanGrubuTask, uyrukTask, saglikDurumuTask);
 
             _model.CinsiyetList = ConvertSelectList(cinsiyetTask.Result.Select(x => new { Id = x.CinsiyeId, Value = x.CinsiyetName }));
             _model.DinList = ConvertSelectList(dinTask.Result.Select(x => new { Id = x.DinId, Value = x.DinName }));
@@ -110,6 +110,7 @@ namespace App.WebInfo.MVCUI.Controllers
             _model.IslemYapanList = ConvertSelectList(islemYapanTask.Result.Select(x => new { Id = x.IslemYapanId, Value = x.IslemYapanName }));
             _model.KanGrubuList = ConvertSelectList(kanGrubuTask.Result.Select(x => new { Id = x.KanGrubuId, Value = x.KanGrubuName }));
             _model.UyrukList = ConvertSelectList(uyrukTask.Result.Select(x => new { Id = x.UyrukId, Value = x.UyrukName }));
+            _model.SaglikDurumuList = ConvertSelectList(saglikDurumuTask.Result.Select(x => new { Id = x.SaglikDurumuId, Value = x.SaglikDurumuName }));
             //cacheModel = _model;
             //    var opts = new MemoryCacheEntryOptions()
             //    {
@@ -125,9 +126,7 @@ namespace App.WebInfo.MVCUI.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-
+               
 
                     var fileName = FileUpload(personalImage);
                     if (!string.IsNullOrEmpty(fileName))
@@ -148,11 +147,7 @@ namespace App.WebInfo.MVCUI.Controllers
                     }
 
                     AlertUiMessage();
-                }
-                else
-                {
-                    return View(_model);
-                }
+              
             }
             catch (Exception ex)
             {
@@ -169,12 +164,13 @@ namespace App.WebInfo.MVCUI.Controllers
             if (imageFile != null && imageFile.Length > 0)
             {
                 var path = Path.Combine(_environment.WebRootPath, "uploads");
+                path = Path.Combine(path, "personalImage");
                 var fileName = imageFile.FileName;
                 var imageType = fileName.Substring(fileName.LastIndexOf('.'),
                     fileName.Length - fileName.LastIndexOf('.'));
                 newFileName = Guid.NewGuid() + "-" + imageType;
-
-                using (Stream fs = System.IO.File.Create(Path.Combine(path, newFileName)))
+                string newFile = Path.Combine(path, newFileName);
+                using (Stream fs = System.IO.File.Create(newFile))
                 {
                     if (fs != null)
                     {
@@ -183,7 +179,7 @@ namespace App.WebInfo.MVCUI.Controllers
                     }
                 }
             }
-            return newFileName;
+            return "/uploads/personalImage/" + newFileName;
         }
 
         public string Buttons(long id, bool state)

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using App.Core.Entites;
 
 namespace App.WebInfo.Entities.Concrete
 {
-    public class Il
+    public class Il : IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
