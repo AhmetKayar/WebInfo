@@ -123,21 +123,27 @@
         if (!result) {
             result = {
                 options: {  // options structure passed to jQuery Validate's validate() method
-                    errorClass: defaultOptions.errorClass || "input-validation-error",
+                    errorClass: defaultOptions.errorClass || "help-block help-block-error",
                     errorElement: defaultOptions.errorElement || "span",
-                    errorPlacement: function () {
+                    errorPlacement: function (e, r) {
                         onError.apply(form, arguments);
                         execInContext("errorPlacement", arguments);
+                        r.is(":checkbox") ? e.insertAfter(r.closest(".md-checkbox-list, .md-checkbox-inline, .checkbox-list, .checkbox-inline")) : r.is(":radio") ? e.insertAfter(r.closest(".md-radio-list, .md-radio-inline, .radio-list,.radio-inline")) : e.insertAfter(r)
+
                     },
                     invalidHandler: function () {
                         onErrors.apply(form, arguments);
                         execInContext("invalidHandler", arguments);
                     },
+                    highlight: function (e) {
+                        $(e).closest(".form-group").addClass("has-error")
+                    },
                     messages: {},
                     rules: {},
-                    success: function () {
+                    success: function (e) {
                         onSuccess.apply(form, arguments);
                         execInContext("success", arguments);
+                        e.closest(".form-group").removeClass("has-error");
                     }
                 },
                 attachValidation: function () {

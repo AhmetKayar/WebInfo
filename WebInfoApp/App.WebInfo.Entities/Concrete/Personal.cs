@@ -109,7 +109,8 @@ namespace App.WebInfo.Entities.Concrete
         [MaxLength(500)]
         public string AdliIslemDurumu { get; set; }
 
-
+        [MaxLength(120)]
+        public string PersonalImage { get; set; }
     }
 
 }

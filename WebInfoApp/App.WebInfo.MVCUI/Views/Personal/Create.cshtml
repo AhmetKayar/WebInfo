@@ -25,162 +25,180 @@
         </div>
     </div>
     <div class="portlet-body">
-         <input type="hidden" asp-for="Personal.PersonalId" />
-                @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Personal.PersonalId" />
+        @Html.AntiForgeryToken()
 
         <form asp-controller="Personal" asp-action="Create" method="post">
-             <div class="tabbable tabbable-tabdrop">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#tab1" data-toggle="tab">Genel Bilgiler</a>
-                        </li>
-                        <li>
-                            <a href="#tab2" data-toggle="tab">Sağlık Bilgileri</a>
-                        </li>
-                        <li>
-                            <a href="#tab3" data-toggle="tab">İkamet Bilgileri</a>
-                        </li>
-                        <li>
-                            <a href="#tab4" data-toggle="tab">Eğitim Bilgileri</a>
-                        </li>
-                        <li>
-                            <a href="#tab5" data-toggle="tab">Kamp Bilgileri</a>
-                        </li>
-                        <li>
-                            <a href="#tab6" data-toggle="tab">Eğitim Bilgileri</a>
-                        </li>
-                        <li>
-                            <a href="#tab7" data-toggle="tab">Sosyal Yardım</a>
-                        </li>
-                        <li>
-                            <a href="#tab8" data-toggle="tab">Adli İşlem</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab1">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                    <input type="text" class="form-control" asp-for="Personal.Adi" id="form_control_1">
-                    <label asp-for="Personal.Adi" for="form_control_1"></label>
-                    <span asp-validation-for="Personal.Adi" class="help-block"></span>
-                </div>
+            <div class="tabbable tabbable-tabdrop">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#tab1" data-toggle="tab">Genel Bilgiler</a>
+                    </li>
+                    <li>
+                        <a href="#tab2" data-toggle="tab">Sağlık Bilgileri</a>
+                    </li>
+                    <li>
+                        <a href="#tab3" data-toggle="tab">İkamet Bilgileri</a>
+                    </li>
+                    <li>
+                        <a href="#tab4" data-toggle="tab">Eğitim Bilgileri</a>
+                    </li>
+                    <li>
+                        <a href="#tab5" data-toggle="tab">Kamp Bilgileri</a>
+                    </li>
+                    <li>
+                        <a href="#tab6" data-toggle="tab">Eğitim Bilgileri</a>
+                    </li>
+                    <li>
+                        <a href="#tab7" data-toggle="tab">Sosyal Yardım</a>
+                    </li>
+                    <li>
+                        <a href="#tab8" data-toggle="tab">Adli İşlem</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab1">
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <input type="text" class="form-control" asp-for="Personal.Adi" id="form_control_1">
+                            <label asp-for="Personal.Adi" for="form_control_1"></label>
+                            <span asp-validation-for="Personal.Adi" class="help-block"></span>
+                        </div>
 
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <input type="text" class="form-control" asp-for="Personal.Soyadi" id="form_control_2">
-                    <label asp-for="Personal.Soyadi" for="form_control_2"></label>
-                    <span asp-validation-for="Personal.Soyadi" class="help-block"></span>
-                </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <input type="text" class="form-control" asp-for="Personal.Soyadi" id="form_control_2">
+                            <label asp-for="Personal.Soyadi" for="form_control_2"></label>
+                            <span asp-validation-for="Personal.Soyadi" class="help-block"></span>
+                        </div>
 
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <input type="text" class="form-control" asp-for="Personal.AnaAdi" id="form_control_3">
-                    <label asp-for="Personal.AnaAdi" for="form_control_3"></label>
-                    <span asp-validation-for="Personal.AnaAdi" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <input type="text" class="form-control" asp-for="Personal.BabaAdi" id="form_control_4">
-                    <label asp-for="Personal.BabaAdi" for="form_control_4"></label>
-                    <span asp-validation-for="Personal.BabaAdi" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <input type="text" class="form-control" asp-for="Personal.AileNo" id="form_control_5">
-                    <label asp-for="Personal.AileNo" for="form_control_5"></label>
-                    <span asp-validation-for="Personal.AileNo" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <input type="text" class="form-control" asp-for="Personal.SahisNo" id="form_control_6">
-                    <label asp-for="Personal.SahisNo"></label>
-                    <span asp-validation-for="Personal.SahisNo" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.Cinsiyet.CinsiyeId" asp-items="@Model.CinsiyetList"></select>
-                    <label asp-for="Personal.Cinsiyet"></label>
-                    <span asp-validation-for="Personal.Cinsiyet" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.Din.DinId" asp-items="@Model.DinList"></select>
-                    <label asp-for="Personal.Din"></label>
-                    <span asp-validation-for="Personal.Din" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.DogumYeri.DogumYeriId" asp-items="@Model.DogumYeriList"></select>
-                    <label asp-for="Personal.DogumYeri"></label>
-                    <span asp-validation-for="Personal.DogumYeri" class="help-block"></span>
-                </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <input type="text" class="form-control" asp-for="Personal.AnaAdi" id="form_control_3">
+                            <label asp-for="Personal.AnaAdi" for="form_control_3"></label>
+                            <span asp-validation-for="Personal.AnaAdi" class="help-block"></span>
                         </div>
-                        <div class="tab-pane" id="tab2">
-                              <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.EgitimDurumu.EgitimDurumuId" asp-items="@Model.EgitimDurumuList"></select>
-                    <label asp-for="Personal.EgitimDurumu"></label>
-                    <span asp-validation-for="Personal.EgitimDurumu" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.IkametDurumu.IkametDurumuId" asp-items="@Model.IkametDurumuList"></select>
-                    <label asp-for="Personal.IkametDurumu"></label>
-                    <span asp-validation-for="Personal.IkametDurumu" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.Il.IlId" asp-items="@Model.IlList"></select>
-                    <label asp-for="Personal.Il"></label>
-                    <span asp-validation-for="Personal.Il" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.Ilce.IlceId" asp-items="@Model.IlceList"></select>
-                    <label asp-for="Personal.Ilce"></label>
-                    <span asp-validation-for="Personal.Ilce" class="help-block"></span>
-                </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <input type="text" class="form-control" asp-for="Personal.BabaAdi" id="form_control_4">
+                            <label asp-for="Personal.BabaAdi" for="form_control_4"></label>
+                            <span asp-validation-for="Personal.BabaAdi" class="help-block"></span>
                         </div>
-                        <div class="tab-pane" id="tab3">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.IslemYapan.IslemYapanId" asp-items="@Model.IslemYapanList"></select>
-                    <label asp-for="Personal.IslemYapan"></label>
-                    <span asp-validation-for="Personal.IslemYapan" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.KanGrubu.KanGrubuId" asp-items="@Model.KanGrubuList"></select>
-                    <label asp-for="Personal.KanGrubu"></label>
-                    <span asp-validation-for="Personal.KanGrubu" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.Uyruk.UyrukId" asp-items="@Model.UyrukList"></select>
-                    <label asp-for="Personal.Uyruk"></label>
-                    <span asp-validation-for="Personal.Uyruk" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.EgitimDurumu.EgitimDurumuId" asp-items="@Model.EgitimDurumuList"></select>
-                    <label asp-for="Personal.EgitimDurumu"></label>
-                    <span asp-validation-for="Personal.EgitimDurumu" class="help-block"></span>
-                </div>
-                <div class="form-group form-md-line-input form-md-floating-label">
-                    <select class="form-control" asp-for="Personal.SaglikDurumu.SaglikDurumuId" asp-items="@Model.SaglikDurumuList"></select>
-                    <label asp-for="Personal.SaglikDurumu"></label>
-                    <span asp-validation-for="Personal.SaglikDurumu" class="help-block"></span>
-                </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <input type="text" class="form-control" asp-for="Personal.AileNo" id="form_control_5">
+                            <label asp-for="Personal.AileNo" for="form_control_5"></label>
+                            <span asp-validation-for="Personal.AileNo" class="help-block"></span>
                         </div>
-                        <div class="tab-pane" id="tab4">
-                            <p> Howdy, I'm in Section 4. </p>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <input type="text" class="form-control" asp-for="Personal.SahisNo" id="form_control_6">
+                            <label asp-for="Personal.SahisNo"></label>
+                            <span asp-validation-for="Personal.SahisNo" class="help-block"></span>
                         </div>
-                        <div class="tab-pane" id="tab5">
-                            <p> Howdy, I'm in Section 5. </p>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.Cinsiyet.CinsiyeId" asp-items="@Model.CinsiyetList"></select>
+                            <label asp-for="Personal.Cinsiyet"></label>
+                            <span asp-validation-for="Personal.Cinsiyet" class="help-block"></span>
                         </div>
-                        <div class="tab-pane" id="tab6">
-                            <p> Howdy, I'm in Section 6. </p>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.Din.DinId" asp-items="@Model.DinList"></select>
+                            <label asp-for="Personal.Din"></label>
+                            <span asp-validation-for="Personal.Din" class="help-block"></span>
                         </div>
-                        <div class="tab-pane" id="tab7">
-                            <p> Howdy, I'm in Section 7. </p>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.DogumYeri.DogumYeriId" asp-items="@Model.DogumYeriList"></select>
+                            <label asp-for="Personal.DogumYeri"></label>
+                            <span asp-validation-for="Personal.DogumYeri" class="help-block"></span>
                         </div>
-                        <div class="tab-pane" id="tab8">
-                            <p> Howdy, I'm in Section 8. </p>
+                        
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="input-group input-large">
+                                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                        <i class="fa fa-file-o fileinput-exists"></i>
+                                        <span class="fileinput-filename"> </span>
+                                    </div>
+                                    <span class="input-group-addon btn default btn-file">
+                                        <span class="fileinput-new"> Resim Seç </span>
+                                        <span class="fileinput-exists"> Değiştir </span>
+                                        <input type="file" accept="*/.jpg" name="personalImage" asp-for="Personal.PersonalImage"/>
+                                    </span>
+                                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Kaldır </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane" id="tab9">
-                            <p> Howdy, I'm in Section 9. </p>
+
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.EgitimDurumu.EgitimDurumuId" asp-items="@Model.EgitimDurumuList"></select>
+                            <label asp-for="Personal.EgitimDurumu"></label>
+                            <span asp-validation-for="Personal.EgitimDurumu" class="help-block"></span>
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.IkametDurumu.IkametDurumuId" asp-items="@Model.IkametDurumuList"></select>
+                            <label asp-for="Personal.IkametDurumu"></label>
+                            <span asp-validation-for="Personal.IkametDurumu" class="help-block"></span>
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.Il.IlId" asp-items="@Model.IlList"></select>
+                            <label asp-for="Personal.Il"></label>
+                            <span asp-validation-for="Personal.Il" class="help-block"></span>
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.Ilce.IlceId" asp-items="@Model.IlceList"></select>
+                            <label asp-for="Personal.Ilce"></label>
+                            <span asp-validation-for="Personal.Ilce" class="help-block"></span>
                         </div>
                     </div>
+                    <div class="tab-pane" id="tab3">
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.IslemYapan.IslemYapanId" asp-items="@Model.IslemYapanList"></select>
+                            <label asp-for="Personal.IslemYapan"></label>
+                            <span asp-validation-for="Personal.IslemYapan" class="help-block"></span>
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.KanGrubu.KanGrubuId" asp-items="@Model.KanGrubuList"></select>
+                            <label asp-for="Personal.KanGrubu"></label>
+                            <span asp-validation-for="Personal.KanGrubu" class="help-block"></span>
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.Uyruk.UyrukId" asp-items="@Model.UyrukList"></select>
+                            <label asp-for="Personal.Uyruk"></label>
+                            <span asp-validation-for="Personal.Uyruk" class="help-block"></span>
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.EgitimDurumu.EgitimDurumuId" asp-items="@Model.EgitimDurumuList"></select>
+                            <label asp-for="Personal.EgitimDurumu"></label>
+                            <span asp-validation-for="Personal.EgitimDurumu" class="help-block"></span>
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <select class="form-control" asp-for="Personal.SaglikDurumu.SaglikDurumuId" asp-items="@Model.SaglikDurumuList"></select>
+                            <label asp-for="Personal.SaglikDurumu"></label>
+                            <span asp-validation-for="Personal.SaglikDurumu" class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab4">
+                        <p> Howdy, I'm in Section 4. </p>
+                    </div>
+                    <div class="tab-pane" id="tab5">
+                        <p> Howdy, I'm in Section 5. </p>
+                    </div>
+                    <div class="tab-pane" id="tab6">
+                        <p> Howdy, I'm in Section 6. </p>
+                    </div>
+                    <div class="tab-pane" id="tab7">
+                        <p> Howdy, I'm in Section 7. </p>
+                    </div>
+                    <div class="tab-pane" id="tab8">
+                        <p> Howdy, I'm in Section 8. </p>
+                    </div>
+                    <div class="tab-pane" id="tab9">
+                        <p> Howdy, I'm in Section 9. </p>
+                    </div>
                 </div>
-              
-                <div class="form-actions noborder">
-                    <button type="submit" class="btn blue">KAYDET</button>
-                </div>
-      
+            </div>
+
+            <div class="form-actions noborder">
+                <button type="submit" class="btn blue">KAYDET</button>
+            </div>
+
         </form>
-       
+
     </div>
 </div>

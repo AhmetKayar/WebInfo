@@ -31,5 +31,8 @@
     <ProjectReference Include="..\App.WebInfo.DataAccess\App.WebInfo.DataAccess.csproj" />
     <ProjectReference Include="..\App.WebInfo.Entities\App.WebInfo.Entities.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
 
 </Project>

@@ -268,7 +268,7 @@ var App = function() {
         });        
 
         $('.form-md-floating-label .form-control').each(function(){
-            if ($(this).val().length > 0) {
+            if ($(this).val()!=null && $(this).val().length > 0) {
                 $(this).addClass('edited');
             }
         });

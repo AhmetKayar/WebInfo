@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,15 +20,18 @@ namespace App.WebInfo.MVCUI.Controllers
     public class PersonalController : ControllerBase
     {
 
-        private IMemoryCache _memoryCache;
+        //private IMemoryCache _memoryCache;
         private readonly IPersonalService _personal;
         private readonly IUtileService _utileService;
         private readonly PersonalViewModel _model;
-        public PersonalController(IPersonalService personal, IUtileService utileService, IMemoryCache memoryCache)
+        private readonly IHostingEnvironment _environment;
+
+        public PersonalController(IPersonalService personal, IUtileService utileService, IMemoryCache memoryCache, IHostingEnvironment environment)
         {
             _personal = personal;
             _utileService = utileService;
-            _memoryCache = memoryCache;
+            _environment = environment;
+            //_memoryCache = memoryCache;
             _model = new PersonalViewModel();
         }
 
@@ -115,24 +121,38 @@ namespace App.WebInfo.MVCUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PersonalViewModel model)
+        public async Task<IActionResult> Create(PersonalViewModel model, IFormFile personalImage)
         {
             try
             {
-                if (model.Personal.PersonalId != 0)
+                if (ModelState.IsValid)
                 {
-                    var updatePersonal = _personal.Update(model.Personal);
-                    await updatePersonal;
-                    alertUi.AlertUiType = updatePersonal.IsCompleted ? AlertUiType.success : AlertUiType.error;
+
+
+                    var fileName = FileUpload(personalImage);
+                    if (!string.IsNullOrEmpty(fileName))
+                    {
+                        model.Personal.PersonalImage = fileName;
+                    }
+                    if (model.Personal.PersonalId != 0)
+                    {
+                        var updatePersonal = _personal.Update(model.Personal);
+                        await updatePersonal;
+                        alertUi.AlertUiType = updatePersonal.IsCompleted ? AlertUiType.success : AlertUiType.error;
+                    }
+                    else
+                    {
+                        var addPersonal = _personal.Add(model.Personal);
+                        await addPersonal;
+                        alertUi.AlertUiType = addPersonal.IsCompleted ? AlertUiType.success : AlertUiType.error;
+                    }
+
+                    AlertUiMessage();
                 }
                 else
                 {
-                    var addPersonal = _personal.Add(model.Personal);
-                    await addPersonal;
-                    alertUi.AlertUiType = addPersonal.IsCompleted ? AlertUiType.success : AlertUiType.error;
-                };
-
-                AlertUiMessage();
+                    return View(_model);
+                }
             }
             catch (Exception ex)
             {
@@ -142,6 +162,30 @@ namespace App.WebInfo.MVCUI.Controllers
 
             return RedirectToAction("Index", model);
         }
+        private string FileUpload(IFormFile imageFile)
+        {
+            var newFileName = string.Empty;
+
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                var path = Path.Combine(_environment.WebRootPath, "uploads");
+                var fileName = imageFile.FileName;
+                var imageType = fileName.Substring(fileName.LastIndexOf('.'),
+                    fileName.Length - fileName.LastIndexOf('.'));
+                newFileName = Guid.NewGuid() + "-" + imageType;
+
+                using (Stream fs = System.IO.File.Create(Path.Combine(path, newFileName)))
+                {
+                    if (fs != null)
+                    {
+                        imageFile.CopyTo(fs);
+                        fs.Flush();
+                    }
+                }
+            }
+            return newFileName;
+        }
+
         public string Buttons(long id, bool state)
         {
             string tmpl = "<div class=\"btn-group\">" +
@@ -155,7 +199,7 @@ namespace App.WebInfo.MVCUI.Controllers
                           "</a>" +
                           "</li>" +
                           "<li>" +
-                          "<a href=\"" + @Url.Action("Delete", "Personal", new { Id = id }) + "\" data-callback=\"TableDatatablesManaged.reflesh()\" class=\"btn-delete\">" +
+                          "<a href=\"" + Url.Action("Delete", "Personal", new { Id = id }) + "\" data-callback=\"TableDatatablesManaged.reflesh()\" class=\"btn-delete\">" +
                           "<i class=\"icon-trash\"></i> Sil" +
                           "</a>" +
                           "</li>" +
@@ -167,7 +211,7 @@ namespace App.WebInfo.MVCUI.Controllers
         {
             //sSearch = sSearch.ToUpper();
 
-            var lists = _personal.GetList(x=>!x.IsDelete);
+            var lists = _personal.GetList(x => !x.IsDelete);
             await lists;
 
             List<Personal> list = lists.Result;
@@ -194,7 +238,7 @@ namespace App.WebInfo.MVCUI.Controllers
             var model = new
             {
                 aaData = orderedlist,
-                iTotalDisplayRecords = enumerable.Count(),
+                iTotalDisplayRecords = enumerable.Length,
                 iTotalRecords = list.Count(),
                 sEcho = sEcho.ToString()
             };
@@ -211,7 +255,7 @@ namespace App.WebInfo.MVCUI.Controllers
                     return Json(new { isSuccess = false });
                 }
 
-                Personal personal = await _personal.Get(x=>x.PersonalId==id);
+                Personal personal = await _personal.Get(x => x.PersonalId == id);
                 if (personal == null)
                 {
                     return Json(new { isSuccess = false });
@@ -225,8 +269,5 @@ namespace App.WebInfo.MVCUI.Controllers
             }
             return Json(new { isSuccess = true });
         }
-
-
-
     }
 }
