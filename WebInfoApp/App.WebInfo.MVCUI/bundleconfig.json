@@ -52,7 +52,9 @@
       "wwwroot/assets/pages/scripts/components-date-time-pickers.min.js",
       "wwwroot/assets/global/plugins/sweetalert/sweetalert.min.js",
       "wwwroot/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js",
-      "wwwroot/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
+      "wwwroot/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
     ],
     // Optionally specify minification options
     "minify": {
