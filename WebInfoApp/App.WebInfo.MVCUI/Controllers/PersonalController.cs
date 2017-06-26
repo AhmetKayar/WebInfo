@@ -126,8 +126,15 @@ namespace App.WebInfo.MVCUI.Controllers
         {
             try
             {
-               
 
+                if (!ModelState.IsValid)
+                {
+                    _model.Personal = model.Personal;
+                    await Bind();
+
+                    return View(_model);
+                }
+                
                     var fileName = FileUpload(personalImage);
                     if (!string.IsNullOrEmpty(fileName))
                     {

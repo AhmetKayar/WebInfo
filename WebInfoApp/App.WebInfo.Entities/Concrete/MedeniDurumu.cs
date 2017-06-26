@@ -8,7 +8,7 @@ namespace App.WebInfo.Entities.Concrete
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MedeniDurumuId { get; set; }
-        [Required]
+  
         [MaxLength(100)]
         public string MedeniDurumuName { get; set; }
     }

@@ -10,7 +10,7 @@ namespace App.WebInfo.Entities.Concrete
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CinsiyeId { get; set; }
 
-        [Required]
+     
         [MaxLength(100)]
         public string CinsiyetName { get; set; }
 

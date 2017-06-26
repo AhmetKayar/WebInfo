@@ -9,7 +9,7 @@ namespace App.WebInfo.Entities.Concrete
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IkametDurumuId { get; set; }
-        [Required]
+
         [MaxLength(100)]
         public string IkametDurumuName { get; set; }
     }

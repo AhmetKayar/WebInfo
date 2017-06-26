@@ -13,7 +13,7 @@ namespace App.WebInfo.Entities.Concrete
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DogumYeriId { get; set; }
 
-        [Required]
+     
         [MaxLength(100)]
         public string DogumYeriName { get; set; }
     }

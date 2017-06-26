@@ -9,7 +9,7 @@ namespace App.WebInfo.Entities.Concrete
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IslemYapanId { get; set; }
-        [Required]
+
         [MaxLength(100)]
         public string IslemYapanName { get; set; }
     }
