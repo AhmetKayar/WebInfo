@@ -111,6 +111,7 @@ namespace App.WebInfo.Entities.Concrete
 
         [MaxLength(120)]
         public string PersonalImage { get; set; }
-    }
+
+        }
 
 }

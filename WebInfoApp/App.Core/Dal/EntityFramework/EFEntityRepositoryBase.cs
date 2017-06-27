@@ -41,11 +41,21 @@ namespace App.Core.Dal.EntityFramework
 
         }
 
-        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter)
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter, string includes = null)
         {
             using (var context = new TContext())
             {
-                return await context.Set<TEntity>().SingleOrDefaultAsync(filter);
+                IQueryable<TEntity> query = context.Set<TEntity>();
+                if (includes != null)
+                {
+                    foreach (var includeProperty in includes.Split
+                        (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        query = query.Include(includeProperty);
+                    }
+
+                }
+                return await query.SingleOrDefaultAsync(filter);
             }
         }
 

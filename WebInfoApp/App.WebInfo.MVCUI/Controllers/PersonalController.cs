@@ -19,7 +19,7 @@ namespace App.WebInfo.MVCUI.Controllers
 {
     public class PersonalController : ControllerBase
     {
-
+        private const string PersonalInculude = "Cinsiyet,Din,DogumYeri,EgitimDurumu,IkametDurumu,Il,Ilce,IslemYapan,KanGrubu,KayitDurumu,Koken,MedeniDurumu,SaglikDurumu,SosyalYardimDurumu,Uyruk";
         //private IMemoryCache _memoryCache;
         private readonly IPersonalService _personal;
         private readonly IUtileService _utileService;
@@ -32,7 +32,7 @@ namespace App.WebInfo.MVCUI.Controllers
             _utileService = utileService;
             _environment = environment;
             //_memoryCache = memoryCache;
-            _model = new PersonalViewModel();
+            _model = new PersonalViewModel { Personal = new Personal() };
         }
 
         // GET: /<controller>/
@@ -66,7 +66,7 @@ namespace App.WebInfo.MVCUI.Controllers
             }
 
 
-            Personal personal = await _personal.Get(x => x.PersonalId == id);
+            Personal personal = await _personal.Get(x => x.PersonalId == id, PersonalInculude);
 
             if (personal == null)
             {
@@ -134,27 +134,33 @@ namespace App.WebInfo.MVCUI.Controllers
 
                     return View(_model);
                 }
-                
-                    var fileName = FileUpload(personalImage);
-                    if (!string.IsNullOrEmpty(fileName))
+
+                var fileName = FileUpload(personalImage);
+                if (personalImage!=null && !string.IsNullOrEmpty(fileName))
+                {
+                    model.Personal.PersonalImage = fileName;
+                }
+                if (model.Personal.PersonalId != 0)
+                {
+                    var updatePersonal = _personal.Update(model.Personal);
+                    await updatePersonal;
+                    if (updatePersonal.IsCompleted)
                     {
-                        model.Personal.PersonalImage = fileName;
-                    }
-                    if (model.Personal.PersonalId != 0)
-                    {
-                        var updatePersonal = _personal.Update(model.Personal);
-                        await updatePersonal;
                         alertUi.AlertUiType = updatePersonal.IsCompleted ? AlertUiType.success : AlertUiType.error;
                     }
-                    else
+                }
+                else
+                {
+                    var addPersonal = _personal.Add(model.Personal);
+                    await addPersonal;
+                    if (addPersonal.IsCompleted)
                     {
-                        var addPersonal = _personal.Add(model.Personal);
-                        await addPersonal;
                         alertUi.AlertUiType = addPersonal.IsCompleted ? AlertUiType.success : AlertUiType.error;
                     }
+                }
 
-                    AlertUiMessage();
-              
+                AlertUiMessage();
+
             }
             catch (Exception ex)
             {

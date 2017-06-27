@@ -30,9 +30,9 @@ namespace App.WebInfo.Business.Concrete
             return await _manager.Count(filter);
         }
 
-        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter = null)
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, string include=null)
         {
-            return await _manager.Get(filter);
+            return await _manager.Get(filter, include);
         }
         public async Task<List<TEntity>> GetList()
         {
