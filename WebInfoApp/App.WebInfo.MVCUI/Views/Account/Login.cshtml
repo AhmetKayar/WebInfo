@@ -1,0 +1,93 @@
+﻿@model App.WebInfo.MVCUI.Controllers.LoginViewModel
+
+@{
+    ViewBag.Title = "Kullanıcı Girişi";
+    Layout = "_LoginLayout";
+}
+
+
+<!-- BEGIN : LOGIN PAGE 5-1 -->
+<div class="user-login-5">
+    <div class="row bs-reset">
+        <div class="col-md-6 bs-reset">
+            <div class="login-bg" style="background-image:url(../assets/pages/img/login/bg1.jpg);">
+                <img class="login-logo" src="../assets/pages/img/login/logo.png" style="display:none" />
+            </div>
+        </div>
+        <div class="col-md-6 login-container bs-reset">
+            <div class="login-content ">
+                <h1 style="color:cornflowerblue;"><b>WebInfo Yönetim Paneli</b></h1>
+              
+                
+
+                <form asp-controller="Account" asp-action="Login" class="login-form" method="post">
+
+                
+                    <div class="alert alert-danger display-hide">
+                        <button class="close" data-close="alert"></button>
+                        <span>Kullanıcı Adı ve Şifre giriniz.</span>
+                    </div>
+                    <environment names="Development">
+                        <div class="row">
+                            <div class="col-xs-6" style="font-weight:bold;">
+                                <input type="text" asp-for="UserName" class="form-control form-control-solid placeholder-no-fix form-group" placeholder="" autocomplete="off" />
+                            </div>
+                            <div class="col-xs-6" style=" font-weight:bold;">
+                                <input type="text" asp-for="Password" class="form-control form-control-solid placeholder-no-fix form-group" placeholder="" autocomplete="off" />
+                            </div>
+                        </div>
+                    </environment>
+                    <environment names="Staging,Production">
+                        <div class="row">
+                            <div class="col-xs-6" style="font-weight:bold;">
+                                <input type="text" asp-for="UserName" class="form-control form-control-solid placeholder-no-fix form-group" placeholder="" autocomplete="off" />
+                            </div>
+                            <div class="col-xs-6" style=" font-weight:bold;">
+                                <input type="password" asp-for="Password" class="form-control form-control-solid placeholder-no-fix form-group" placeholder="" autocomplete="off" />
+                            </div>
+                        </div>
+                    </environment>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="rem-password">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-8 text-right">
+                                <button class="btn green" type="submit">Giriş Yap</button>
+                            </div>
+                        </div>
+</form>
+            </div>
+            <div class="login-footer">
+                <div class="row bs-reset">
+                    <div class="col-xs-5 bs-reset">
+                        <ul class="login-social">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="icon-social-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="icon-social-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="icon-social-dribbble"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-7 bs-reset">
+                        <div class="login-copyright text-right">
+                            <p>Copyright &copy; Jetmobil.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END : LOGIN PAGE 5-1 -->

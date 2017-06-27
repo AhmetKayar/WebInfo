@@ -1,0 +1,35 @@
+﻿@model App.WebInfo.MVCUI.Models.ImportModel
+@{
+    ViewBag.Title = "Toplu Yükleme";
+    ViewBag.isMenuLink = "/";
+    ViewBag.SubTitle = "Toplu Personel Yükleme";
+    ViewBag.SubDescription = "Yükleme.";
+}
+<form asp-controller="Home" asp-action="ImportFile" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <div class="form-group form-md-line-input form-md-floating-label">
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+                <div class="input-group input-large">
+                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                        <i class="fa fa-file-o fileinput-exists"></i>
+                        <span class="fileinput-filename"> </span>
+                    </div>
+                    <span class="input-group-addon btn default btn-file">
+                        <span class="fileinput-new"> Personel Listei Seç </span>
+                        <span class="fileinput-exists"> Değiştir </span>
+                        <input type="file" accept="*/*" name="importFile" id="importFile" />
+                    </span>
+                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Kaldır </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn green">Yükle</button>
+</form>
+@foreach (var personal in Model.Personals)
+{
+    <div>
+        <span>@personal.Adi</span>
+        <span>@personal.Soyadi</span>
+    </div>
+}

@@ -1,0 +1,253 @@
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] </title>
+
+    <environment names="Development">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/simple-line-icons/simple-line-icons.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.css" />
+        <link rel="stylesheet" href="~/assets/global/css/components-md.css" />
+        <link rel="stylesheet" href="~/assets/global/css/plugins-md.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/datatables/datatables.min.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/select2/css/select2.min.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/select2/css/select2-bootstrap.min.css" />
+        <link rel="stylesheet" href="~/assets/apps/css/todo.min.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/sweetalert/sweetalert.css" />
+        <link rel="stylesheet" href="~/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" />
+        <link href="~/assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/assets/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="~/assets/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    @Html.Raw(JavaScriptSnippet.FullScript)
+</head>
+<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo page-md">
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner ">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a style="margin-top:17px; text-decoration:none;" href="/">
+                    <span style="font-size:20px; font-weight:bold;" class="logo-default">Salihli Web Info</span><br />
+                    <span style="color: darkgray; font-weight:normal;" class="logo-default">Kullanıcı Bilgi Takibi</span>
+                </a>
+                <div style="margin-top:25px;" class="menu-toggler sidebar-toggler">
+                    <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                </div>
+            </div>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN PAGE TOP -->
+            <div class="page-actions">
+                <div class="btn-group">
+                    <button type="button" class="btn red-haze btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="true">
+                        <span class="hidden-sm hidden-xs">İşlemler&nbsp;</span>
+                        <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a asp-controller="Home" asp-action="ImportFile">
+                                <i class="icon-docs"></i> Toplu Yükleme </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="icon-user"></i> Kullancılar </a>
+                        </li>
+                        <li class="divider"> </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="icon-settings"></i> Ayarlar
+                                <span class="badge badge-success">4</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <i class="icon-users"></i> Feedbacks
+                                <span class="badge badge-danger">2</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="page-top">
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="separator hide"> </li>
+                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <!--Ahmet Kapattı-->
+                        <!--await Component.InvokeAsync("UserLoginViewComponet")-->
+                        <!-- END USER LOGIN DROPDOWN -->
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END PAGE TOP -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+            <!-- BEGIN SIDEBAR -->
+
+            <div class="page-sidebar navbar-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+
+
+
+                <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                    <li class="nav-item start ">
+
+                        <a href="/" class="nav-link nav-toggle">
+                            <i class="icon-home"></i>
+                            <span class="title">Ana Sayfa</span>
+                        </a>
+                    </li>
+                    @await Component.InvokeAsync("MenuViewComponet")
+
+                    <li class="nav-item start">
+
+                        <a class="nav-link nav-toggle" asp-controller="Account" asp-action="LogOff">
+                            <i class="glyphicon glyphicon-off"></i>
+                            <span class="title">Güvenli Çıkış</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- END SIDEBAR MENU -->
+            </div>
+            <!-- END SIDEBAR -->
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <!-- BEGIN PAGE HEAD-->
+                <div class="page-head">
+                    <!-- BEGIN PAGE TITLE -->
+                    <div class="page-title">
+                        <h1>
+                            @ViewBag.SubTitle
+                            <small>@ViewBag.SubDescription</small>
+                        </h1>
+                    </div>
+                    <!-- END PAGE TITLE -->
+                </div>
+                <!-- END PAGE HEAD-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="/">Ana Sayfa</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                    <li>
+                        <a class="active" href="@ViewBag.isMenuLink">@ViewBag.breadcrumb</a>
+                    </li>
+                </ul>
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN PAGE BASE CONTENT -->
+                @RenderBody()
+
+
+
+                <!-- END PAGE BASE CONTENT -->
+
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            2017 &copy; Tüm hakları saklıdır.
+            <a href="http://salihli.azurewebsites.net/" title="WebInfo" target="_blank">WebInfo</a>
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+
+    <environment names="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="/assets/global/plugins/bootstrap/js/bootstrap.js"></script>
+        <script src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+        <script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+        <script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.js"></script>
+        <script src="/assets/global/scripts/app.js" asp-append-version="true"></script>
+        <script src="/assets/layouts/layout4/scripts/layout.js"></script>
+        <script src="/assets/layouts/layout4/scripts/demo.js"></script>
+        <script src="/assets/layouts/global/scripts/quick-sidebar.js"></script>
+        <script src="/assets/global/scripts/datatable.js"></script>
+        <script src="/assets/global/plugins/datatables/datatables.min.js"></script>
+        <script src="/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+        <script src="/assets/pages/scripts/table-datatables-managed.js"></script>
+        <script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/assets/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js"></script>
+        <script src="/assets/global/plugins/select2/js/select2.full.min.js"></script>
+        <script src="/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+        <script src="/assets/pages/scripts/components-bootstrap-select.js"></script>
+        <script src="/assets/apps/scripts/todo.min.js"></script>
+        <script src="/assets/pages/scripts/components-date-time-pickers.min.js"></script>
+        <script src="/assets/global/plugins/sweetalert/sweetalert.min.js"></script>
+        <script src="/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
+        <script src="/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+        <script src="/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+      
+            @Html.Raw(TempData["alertUi"])
+      
+    </script>
+</body>
+</html>
