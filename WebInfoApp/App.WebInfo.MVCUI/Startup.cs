@@ -49,14 +49,15 @@ namespace App.WebInfo.MVCUI
             services.AddMvc();
             services.AddDbContext<WebInfoContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("WebInfoContext")));
+            services.AddDbContext<CustomIdentityDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("WebInfoContext")));
+
             services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
                 .AddEntityFrameworkStores<CustomIdentityDbContext>().AddDefaultTokenProviders();
 
             services.AddSession();
             services.Configure<IdentityOptions>(options =>
             {
-                options.Cookies.ApplicationCookie.LoginPath = "/Login";
-                options.Cookies.ApplicationCookie.LogoutPath = "/Login/Logoff";
 
                 options.Cookies.ApplicationCookie.SlidingExpiration = true;
                 options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromMinutes(10);
@@ -84,6 +85,7 @@ namespace App.WebInfo.MVCUI
 
 
             app.UseStaticFiles();
+            app.UseIdentity();
             app.UseSession();
 
             app.UseMvc(routes =>

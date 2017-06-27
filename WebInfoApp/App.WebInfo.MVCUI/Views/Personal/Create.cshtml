@@ -28,6 +28,7 @@
     <div class="portlet-body">
         <form asp-controller="Personal" asp-action="Create" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="Personal.PersonalId" />
+            <input type="hidden" asp-for="Personal.CreationDate" />
             @Html.AntiForgeryToken()
 
 

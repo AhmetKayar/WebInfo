@@ -1,0 +1,34 @@
+﻿@model App.WebInfo.MVCUI.Controllers.RegisterViewModel
+
+@{
+    ViewBag.Title = "Kayıt";
+    Layout = "_LoginLayout";
+}
+
+<form asp-controller="Account" asp-action="Register" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label asp-for="UserName" class="col-md-3 control-label"></label>
+        <div class="col-md-9">
+            <input asp-for="UserName" class="form-control" placeholder="UserName">
+            <span asp-validation-for="UserName"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password" class="col-md-3 control-label"></label>
+        <div class="col-md-9">
+            <input asp-for="Password" class="form-control" placeholder="UserName">
+            <span asp-validation-for="Password"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="col-md-3 control-label"></label>
+        <div class="col-md-9">
+            <input asp-for="Email" class="form-control" placeholder="Email">
+            <span asp-validation-for="Email"></span>
+        </div>
+    </div>
+    <div class="form-actions noborder">
+        <button type="submit" class="btn blue">KAYDET</button>
+    </div>
+</form>

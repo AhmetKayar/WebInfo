@@ -114,6 +114,8 @@ namespace App.Core.Dal.EntityFramework
         {
             using (var context = new TContext())
             {
+                var dbSet = context.Set<TEntity>();
+                dbSet.Attach(entity);
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
                 await context.SaveChangesAsync();

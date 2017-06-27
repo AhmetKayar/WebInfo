@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Text;
-using App.WebInfo.Business.Abstract;
-using App.WebInfo.MVCUI.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using App.WebInfo.Business.Abstract;
 using App.WebInfo.Entities.Concrete;
+using App.WebInfo.MVCUI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace App.WebInfo.MVCUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class HomeController : ControllerBase
     {
         private readonly IPersonalService _personalService;

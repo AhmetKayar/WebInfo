@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
@@ -17,13 +18,14 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace App.WebInfo.MVCUI.Controllers
 {
+    [Authorize]
     public class PersonalController : ControllerBase
     {
         private const string PersonalInculude = "Cinsiyet,Din,DogumYeri,EgitimDurumu,IkametDurumu,Il,Ilce,IslemYapan,KanGrubu,KayitDurumu,Koken,MedeniDurumu,SaglikDurumu,SosyalYardimDurumu,Uyruk";
-        //private IMemoryCache _memoryCache;
+        private IMemoryCache _memoryCache;
         private readonly IPersonalService _personal;
         private readonly IUtileService _utileService;
-        private readonly PersonalViewModel _model;
+        private PersonalViewModel _model;
         private readonly IHostingEnvironment _environment;
 
         public PersonalController(IPersonalService personal, IUtileService utileService, IMemoryCache memoryCache, IHostingEnvironment environment)
@@ -31,7 +33,7 @@ namespace App.WebInfo.MVCUI.Controllers
             _personal = personal;
             _utileService = utileService;
             _environment = environment;
-            //_memoryCache = memoryCache;
+            _memoryCache = memoryCache;
             _model = new PersonalViewModel { Personal = new Personal() };
         }
 
@@ -82,11 +84,11 @@ namespace App.WebInfo.MVCUI.Controllers
 
         private async Task Bind()
         {
-            //var CacheKey = "Personal_cache_bind";
-            //PersonalViewModel cacheModel;
-            //if (_memoryCache.TryGetValue(CacheKey, out cacheModel))
-            //{
-            var cinsiyetTask = _utileService.GetCinsiyets();
+            var CacheKey = "Personal_cache_bind";
+            PersonalViewModel cacheModel;
+            if (!_memoryCache.TryGetValue(CacheKey, out cacheModel))
+            {
+                var cinsiyetTask = _utileService.GetCinsiyets();
             var dinTask = _utileService.GetDins();
             var dogumYeriTask = _utileService.GetDogumYeris();
             var egitimDurumuTask = _utileService.GetEgitimDurumus();
@@ -111,13 +113,15 @@ namespace App.WebInfo.MVCUI.Controllers
             _model.KanGrubuList = ConvertSelectList(kanGrubuTask.Result.Select(x => new { Id = x.KanGrubuId, Value = x.KanGrubuName }));
             _model.UyrukList = ConvertSelectList(uyrukTask.Result.Select(x => new { Id = x.UyrukId, Value = x.UyrukName }));
             _model.SaglikDurumuList = ConvertSelectList(saglikDurumuTask.Result.Select(x => new { Id = x.SaglikDurumuId, Value = x.SaglikDurumuName }));
-            //cacheModel = _model;
-            //    var opts = new MemoryCacheEntryOptions()
-            //    {
-            //        SlidingExpiration = TimeSpan.FromMinutes(30)
-            //    };
-            //    _memoryCache.Set(CacheKey, cacheModel, opts);
-            //}
+                cacheModel = _model;
+
+                var opts = new MemoryCacheEntryOptions()
+                {
+                    SlidingExpiration = TimeSpan.FromMinutes(30)
+                };
+                _memoryCache.Set(CacheKey, cacheModel, opts);
+            }
+            _model = cacheModel;
         }
 
         [HttpPost]
@@ -126,22 +130,31 @@ namespace App.WebInfo.MVCUI.Controllers
         {
             try
             {
-
+                await Bind();
                 if (!ModelState.IsValid)
                 {
                     _model.Personal = model.Personal;
-                    await Bind();
+
 
                     return View(_model);
                 }
 
                 var fileName = FileUpload(personalImage);
-                if (personalImage!=null && !string.IsNullOrEmpty(fileName))
+                if (personalImage != null && !string.IsNullOrEmpty(fileName))
                 {
                     model.Personal.PersonalImage = fileName;
                 }
                 if (model.Personal.PersonalId != 0)
                 {
+                    model.Personal.CreationDate = DateTime.Now;
+                    model.Personal.LastModifiedDate = DateTime.Now;
+                    model.Personal.Cinsiyet = _model.CinsiyetList.Select(x => new Cinsiyet()
+                    {
+                        CinsiyeId = Convert.ToInt32(x.Value),
+                        CinsiyetName = x.Text
+                    })
+                        .FirstOrDefault(x => x.CinsiyeId == model.Personal.Cinsiyet.CinsiyeId);
+
                     var updatePersonal = _personal.Update(model.Personal);
                     await updatePersonal;
                     if (updatePersonal.IsCompleted)
@@ -151,6 +164,8 @@ namespace App.WebInfo.MVCUI.Controllers
                 }
                 else
                 {
+                    model.Personal.CreationDate = DateTime.Now;
+
                     var addPersonal = _personal.Add(model.Personal);
                     await addPersonal;
                     if (addPersonal.IsCompleted)
@@ -219,11 +234,41 @@ namespace App.WebInfo.MVCUI.Controllers
         public async Task<JsonResult> GetList(int iDisplayStart, int iDisplayLength, string sSearch, int iColumns, int iSortingCols, int iSortCol_0, string sSortDir_0, int sEcho)
         {
             //sSearch = sSearch.ToUpper();
+            object cacheKey = "PersonalList_CacheKey";
 
-            var lists = _personal.GetList(x => !x.IsDelete);
-            await lists;
+            List<Personal> cacheModel;
+            //if (_memoryCache.TryGetValue(cacheKey, out cacheModel))
+            //{
+            //    var lists = _personal.GetList(x => !x.IsDelete);
+            //    await lists;
+            //    cacheModel = lists.Result;
+            //    var opts = new MemoryCacheEntryOptions()
+            //   {
+            //      SlidingExpiration = TimeSpan.FromMinutes(30)
+            //    };
+            //    _memoryCache.Set(cacheKey, cacheModel, opts);
+            //}
+            if (!_memoryCache.TryGetValue(cacheKey, out cacheModel))
+            {
+                var lists = _personal.GetList(x => !x.IsDelete);
+                await lists;
+                cacheModel = lists.Result;
+                var opts = new MemoryCacheEntryOptions()
+                {
+                    SlidingExpiration = TimeSpan.FromMinutes(30)
+                };
+                _memoryCache.Set(cacheKey, cacheModel, opts);
+            }
+            //var cacheEntry = await
+            //    _memoryCache.GetOrCreateAsync(cacheKey, entry =>
+            //    {
+            //        entry.SlidingExpiration = TimeSpan.FromSeconds(3);
+            //        var lists = _personal.GetList(x => !x.IsDelete);
+       
+            //        return Task.FromResult(lists);
+            //    });
 
-            List<Personal> list = lists.Result;
+            List<Personal> list = cacheModel;
 
             var filteredlist =
                 list
@@ -239,11 +284,22 @@ namespace App.WebInfo.MVCUI.Controllers
                     }).Where(x => string.IsNullOrEmpty(sSearch) || x.Any(y => y.IndexOf(sSearch, StringComparison.CurrentCultureIgnoreCase) >= 0));
 
             var enumerable = filteredlist as string[][] ?? filteredlist.ToArray();
-            var orderedlist = enumerable
+            if (sSortDir_0 == "desc")
+            {
+                filteredlist = enumerable.OrderByDescending(x => (x[iSortCol_0]));
+
                 //.OrderByOrdinal(x => (x[iSortCol_0]).Parse(), sSortDir_0 == "desc")
+            }
+            else
+            {
+                filteredlist = enumerable.OrderBy(x => (x[iSortCol_0]));
+            }
+
+            filteredlist = filteredlist
                 .Skip(iDisplayStart)
                 .Take(iDisplayLength);
 
+            var orderedlist = filteredlist;
             var model = new
             {
                 aaData = orderedlist,
