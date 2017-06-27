@@ -82,6 +82,32 @@ namespace App.WebInfo.MVCUI.Controllers
             return View("Create", _model);
         }
 
+
+        public async Task<ActionResult> Detail(long? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            Personal personal = await _personal.Get(x => x.PersonalId == id, PersonalInculude);
+
+            if (personal == null)
+            {
+                return NotFound();
+            }
+
+
+            await Bind();
+            _model.Personal = personal;
+
+            return View(_model);
+        }
+
+
+
         private async Task Bind()
         {
             var CacheKey = "Personal_cache_bind";
@@ -217,6 +243,11 @@ namespace App.WebInfo.MVCUI.Controllers
                           "İşlemler<i class=\"fa fa-angle-down\"></i>" +
                           "</button>" +
                           "<ul class=\"dropdown-menu\" role=\"menu\">" +
+                          "<li>" +
+                          "<a href=\"" + Url.Action("Detail", "Personal", new { Id = id }) + "\">" +
+                          "<i class=\"icon-docs\"></i> Detay" +
+                          "</a>" +
+                          "</li>" +
                           "<li>" +
                           "<a href=\"" + Url.Action("Edit", "Personal", new { Id = id }) + "\">" +
                           "<i class=\"icon-docs\"></i> Düzenle" +
