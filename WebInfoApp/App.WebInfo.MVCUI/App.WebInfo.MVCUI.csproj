@@ -6,6 +6,8 @@
 
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+    <ApplicationInsightsResourceId>/subscriptions/5a13cbe6-87bc-4b5d-872a-20f3d8d15ed4/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/App.WebInfo.MVCUI</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/5a13cbe6-87bc-4b5d-872a-20f3d8d15ed4/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/App.WebInfo.MVCUI</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +36,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\uploads\personalImage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
