@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.WebInfo.Entities.Concrete;
+using App.WebInfo.MVCUI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -106,19 +109,12 @@ namespace App.WebInfo.MVCUI.Controllers
             _signInManager.SignOutAsync().Wait();
             return RedirectToAction("Login");
         }
-    }
 
-    public class LoginViewModel
-    {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public bool RememberMe { get; set; }
-    }
-
-    public class RegisterViewModel
-    {
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> List()
+        {
+            List<CustomIdentityUser> userList = await _userManager.Users.ToListAsync();
+            return View(userList);
+        }
     }
 }
